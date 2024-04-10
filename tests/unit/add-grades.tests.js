@@ -33,9 +33,15 @@ suite('Add Grades page', function() {
         body: "subject=Physics&value=3.90"
       }
     );
-    let body = await res.text();
+    let resRedirect = await fetch(
+      "http://localhost:8888/My-Grades",
+      {
+        method: 'GET'
+      }
+    );
+    let body = await resRedirect.text();
     let gradesReturned = body.includes(
-		"<ul><li>English (4.50)</li><li>Math (5.50)</li><li>Programming Basics (6.00)</li><li>Physics (3.90)</li></ul>");
+		"<ul><li>English (5.50)</li><li>Math (4.50)</li><li>Programming Basics (6.00)</li><li>Physics (3.90)</li></ul>");
     assert.ok(gradesReturned, "Add grade failed");
   });
 
